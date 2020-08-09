@@ -1,0 +1,106 @@
+
+    <h2>Danh sách sản phẩm</h2>
+
+        {{# each danhsach }}
+
+            <img class="card-img-top" src="http://192.168.0.105:4000/{{anh}}" style="display: block;margin-left: auto;margin-right: auto;width: 400px;height:200px;border-radius: 25%;" />
+
+            <p class=" data" style="color: red"> {{tensp}}</p>
+
+            <p class=" data">ID Phẩm : {{_id}} Đồng</p>
+            <p class=" data">Tên Sản Phẩm : {{tensp}} </p>
+            <p class=" data">Gía Sản Phẩm : {{gia}} Đồng</p>
+            <p class=" data">Số lượng : {{soluong}} </p>
+            <p class=" data">Loại Sp : {{loaisp}} </p>
+
+
+
+
+            <form method="POST">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelUpdate" onclick="myvalue('{{_id}}')">Sửa</button>
+                <input type="hidden" value="{{_id}}" name="txtID" />
+                <button class="btn btn-danger" type="submit" formaction="/deletesp" style="margin-top: 10px;">Xóa</button>
+            </form>
+            </td>
+            </tr>
+        {{/each}}
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số Lượng</th>
+            <th scope="col">Màu</th>
+            <th scope="col">Thể Loại</th>
+            <th scope="col" style="text-align: center;">Ảnh</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+
+    <form action="/addsp" method="POST" enctype="multipart/form-data">
+        <tr>
+            <td >Thêm sản phẩm</td>
+            <td><input type="text" class="form-control mb-4" placeholder="Tên" name="txtName"></td>
+            <td><input type="text" class="form-control mb-4" placeholder="Giá" name="txtGia"></td>
+            <td><input type="number" class="form-control mb-4" placeholder="Số lượng" name="txtSoLuong"></td>
+            <td><input type="text" class="form-control mb-4" placeholder="Màu sắc" name="txtMau"></td>
+            <td><select id="cars" name="loaisp" class="form-control mb-4">
+                <option>Loại sp</option>
+                <option value="Điện thoại">VCT</option>
+                <option value="Máy tính">casion</option>
+                <option value="Tivi">Đồng hồ cơ</option>
+                <option value="Xe">Đồng hồ vàng</option>
+              </select></td>
+            <td><input type="file" class="form-control mb-4" name="anh"></td>
+            <td><button class="btn btn-success" type="submit">Thêm</button></td>
+        </tr>
+    </form>
+
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form class="text-center border border-light p-5" action="/updatesp" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <h1 style="color: green;font-weight: bold;margin-bottom: 20px;">Sửa sản phẩm</h1>
+                    <input type="text" id="idshow" class="form-control mb-4" disabled>
+                    <input type="hidden" name="txtID" id="txtID">
+                    <input type="text" class="form-control mb-4" placeholder="Tên" name="txtName">
+                    <input type="text" class="form-control mb-4" placeholder="Giá" name="txtGia">
+                    <input type="number" class="form-control mb-4" placeholder="Số lượng" name="txtSoLuong">
+                    <input type="text" class="form-control mb-4" placeholder="Màu sắc" name="txtMau">
+                    <select id="cars" name="loaisp" class="form-control mb-4">
+                <option value="Điện thoại">Điện thoại</option>
+                <option value="Máy tính">Máy tính</option>
+                <option value="Tivi">Tivi</option>
+                <option value="Xe">Xe</option>
+              </select>
+                    <input type="file" class="form-control mb-4" name="anh">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-success">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myvalue(giatri) {
+        document.getElementById("idshow").value = giatri;
+        document.getElementById("txtID").value = giatri;
+    }
+</script>

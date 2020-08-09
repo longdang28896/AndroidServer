@@ -1,0 +1,95 @@
+<h2>Danh sách người dùng</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">_Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Họ Tên</th>
+            <th scope="col">Năm Sinh</th>
+            <th scope="col">Địa Chỉ</th>
+            <th scope="col">SĐT</th>
+            <th scope="col" style="text-align: center;">Ảnh</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{# each danhsach}}
+        <tr>
+            <td>
+                {{_id}}
+            </td>
+            <td>
+                <p>{{username}}</p>
+            </td>
+            <td>
+                <p>{{tenkh}}</p>
+            </td>
+            <td>
+                <p>{{namsinh}}</p>
+            </td>
+            <td>
+                <p>{{diachi}}</p>
+            </td>
+            <td>
+                <p>{{sdt}}</p>
+            </td>
+            <td>
+                <img src="http://192.168.0.105:4000/{{anh}}" style="display: block;margin-left: auto;margin-right: auto;width: 50px;height:50px;border-radius: 25%;" />
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelUpdate" onclick="myvalue('{{_id}}')">Sửa</button>
+                <form method="POST">
+                    <input type="hidden" value="{{_id}}" name="txtID" />
+                    <button class="btn btn-danger" type="submit" formaction="/deleteuser" style="margin-top: 10px;">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+    <form action="/adduser" method="POST" enctype="multipart/form-data">
+        <tr>
+            <td><input type="text" class="form-control mb-4" placeholder="Username" name="txtUsername"></td>
+            <td><input type="password" class="form-control mb-4" placeholder="Password" name="txtPassword"></td>
+            <td><input type="text" class="form-control mb-4" placeholder="Tên" name="txtTen"></td>
+            <td><input type="text" class="form-control mb-4" placeholder="Năm Sinh" name="txtNamSinh"></td>
+            <td><input type="text" class="form-control mb-4" placeholder="Địa Chỉ" name="txtDiaChi"></td>
+            <td><input type="text" class="form-control mb-4" placeholder="SĐT" name="txtSDT"></td>
+            <td><input type="file" class="form-control mb-4" name="anh"></td>
+            <td><button class="btn btn-success" type="submit">Thêm</button></td>
+        </tr>
+    </form>
+
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form class="text-center border border-light p-5" action="/updateuser" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <h1 >Sửa khách hàng</h1>
+                    <input type="text" id="idshow" class="form-control mb-4" disabled>
+                    <input type="hidden" name="txtID" id="txtID">
+                    <input type="text" class="form-control mb-4" placeholder="Username" name="txtUsername">
+                    <input type="password" class="form-control mb-4" placeholder="Password" name="txtPassword">
+                    <td><input type="text" class="form-control mb-4" placeholder="Tên" name="txtTen"></td>
+                    <input type="text" class="form-control mb-4" placeholder="Năm Sinh" name="txtNamSinh">
+                    <input type="text" class="form-control mb-4" placeholder="Địa Chỉ" name="txtDiaChi">
+                    <input type="text" class="form-control mb-4" placeholder="SĐT" name="txtSDT">
+                    <input type="file" class="form-control mb-4" name="anh">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-success">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myvalue(giatri) {
+        document.getElementById("idshow").value = giatri;
+        document.getElementById("txtID").value = giatri;
+    }
+</script>

@@ -1,0 +1,46 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">_ID</th>
+            <th scope="col">User ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Tên KH</th>
+            <th scope="col">ID Sản Phẩm</th>
+            <th scope="col">Tên SP</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each danhsach}}
+        <tr>
+            <td>
+                {{id}}
+            </td>
+            <td>
+                <p>{{uid}}</p>
+            </td>
+            <td>
+                <p>{{username}}</p>
+            </td>
+            <td>
+                <p>{{tenkh}}</p>
+            </td>
+            <td>
+                <p>{{pid}}</p>
+            </td>
+            <td>
+                <p>{{tensp}}</p>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" value="{{id}}" name="txtID" />
+                    <button class="btn btn-success" type="submit" formaction="/deletedonhang" style="margin-top: 10px;">Đơn Giao Hàng</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+
+
